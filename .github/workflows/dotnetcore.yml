@@ -21,7 +21,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Publish
-      run: dotnet publish --configuration Release --no-restore -o ./package
+    - name: pack
+      run: dotnet pack --configuration Release
     - name: Push to NuGet
-      run: dotnet nuget push ./package/*.nupkg -k ${{ secrets.NUGET_APIKEY }}
+      run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_APIKEY }} --source https://api.nuget.org/v3/index.json
