@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Kazuki Ota</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company />
@@ -18,7 +18,10 @@
     <PackageTags>WPF .NETCore</PackageTags>
     <PackageLicenseFile>content/LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="../LICENSE.txt">
       <CopyToOutputDirectory>always</CopyToOutputDirectory>
