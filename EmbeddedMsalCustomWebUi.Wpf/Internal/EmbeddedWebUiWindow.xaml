@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmbeddedMsalCustomWebUi.Wpf.Internal"
         mc:Ignorable="d"
+        WindowStyle="ToolWindow"
         Loaded="Window_Loaded"
         Closed="Window_Closed"
         Title="EmbeddedWebUiWindow" Height="450" Width="800">

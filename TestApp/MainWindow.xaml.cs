@@ -43,7 +43,8 @@ namespace TestApp
                     .ExecuteAsync();
 
                 var jwt = new JwtSecurityToken(r.AccessToken);
-                textBlockOutput.Text = string.Join(Environment.NewLine, jwt.Claims.Select(x => $"{x.Type}: {x.Value}"));
+                var name = jwt.Claims.First(x => x.Type == "name");
+                textBlockOutput.Text = $"Hello, {name.Value}.";
             }
             catch (Exception ex)
             {
