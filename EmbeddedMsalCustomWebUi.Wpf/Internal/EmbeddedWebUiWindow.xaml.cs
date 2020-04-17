@@ -63,8 +63,11 @@ namespace EmbeddedMsalCustomWebUi.Wpf.Internal
             Close();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) => 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             _token = _cancellationToken.Register(() => _taskCompletionSource.SetCanceled());
+            webBrowser.Navigate(_authorizationUri);
+        }
 
         private void Window_Closed(object sender, EventArgs e)
         {

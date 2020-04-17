@@ -13,7 +13,7 @@ namespace EmbeddedMsalCustomWebUi.Wpf
     /// </summary>
     public class EmbeddedBrowserWebUi : ICustomWebUi
     {
-        public const int DefaultWindowWidth = 400;
+        public const int DefaultWindowWidth = 600;
         public const int DefaultWindowHeight = 800;
 
         private readonly Window _owner;
