@@ -5,7 +5,6 @@ The objective for this repo is to provide a sample code how to create custom web
 If you would like to just use this sample code, you can get a nuget package from:
 https://www.nuget.org/packages/EmbeddedMsalCustomWebUi.Wpf/
 
-
 ## How to use it?
 
 It's easy to use, you can use this just set `EmbeddedMsalCustomWebUi.Wpf.EmbeddedBrowserWebUi` with `WithCustomWebUi` of MSAL.NET extension method.
@@ -24,3 +23,7 @@ And there are a few additional constructor arguments:
 - windowWidth: The window width. The default value is 800.
 - windowHeight: The window height. The default value is 650.
 - windowStartupLocation: Thw window startup location. The default value is CenterOwner.
+
+## How does it work
+
+![sign in](images/signinflow.gif)
