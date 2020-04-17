@@ -1,6 +1,10 @@
 # Embedded Web UI for MSAL.NET for WPF on .NET Core
 
-This library provides embedded web browser interface for WPF on .NET Core when using MSAL.NET.
+This provides embedded web browser interface for WPF on .NET Core when using MSAL.NET.
+The objective for this repo is to provide a sample code how to create custom web ui on MSAL.NET.
+If you would like to just use this sample code, you can get a nuget package from:
+https://www.nuget.org/packages/EmbeddedMsalCustomWebUi.Wpf/
+
 
 ## How to use it?
 
