@@ -10,5 +10,6 @@ namespace TestApp
         public string TenantId { get; set; }
         public string RedirectUri { get; set; }
         public string B2CAuthority { get; set; }
+        public string Scope { get; set; }
     }
 }

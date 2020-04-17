@@ -17,6 +17,7 @@ namespace TestApp
     {
         public static new App Current => (App)Application.Current;
         public IPublicClientApplication PublicClientApplication { get; private set; }
+        public string[] Scopes { get; private set; }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
@@ -31,9 +32,10 @@ namespace TestApp
 {
   ""AzureAdB2C"": {
     ""ClientId"": ""your client id"",
-    ""RedirectUri"": ""your redirect uri"",
+    ""RedirectUri"": ""your redirect uri such as https://wpfnetcore.b2clogin.com/oauth2/nativeclient"",
     ""TenantId"": ""your tenant id"",
-    ""B2CAuthority"": ""https://{your_tenant_name}.b2clogin.com/tfp/{your_tenant_name}.onmicrosoft.com/{sign_in_flow_name}""
+    ""B2CAuthority"": ""https://{your_tenant_name}.b2clogin.com/tfp/{your_tenant_name}.onmicrosoft.com/{sign_in_flow_name}"",
+    ""Scope"": ""your scope""
   }
 }");
                 Shutdown();
@@ -46,6 +48,7 @@ namespace TestApp
                 .WithTenantId(b2cSettings.TenantId)
                 .WithB2CAuthority(b2cSettings.B2CAuthority)
                 .Build();
+            Scopes = new[] { b2cSettings.Scope };
         }
     }
 }

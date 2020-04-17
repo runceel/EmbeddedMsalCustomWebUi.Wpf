@@ -1,21 +1,11 @@
 ﻿using Microsoft.Identity.Client.Extensibility;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EmbeddedMsalCustomWebUi.Wpf.Internal
 {
@@ -48,13 +38,16 @@ namespace EmbeddedMsalCustomWebUi.Wpf.Internal
                 return;
             }
 
+            // parse query string
             var query = HttpUtility.ParseQueryString(e.Uri.Query);
             if (query.AllKeys.Any(x => x == "code"))
             {
+                // It has a code parameter.
                 _taskCompletionSource.SetResult(e.Uri);
             }
             else
             {
+                // error.
                 _taskCompletionSource.SetException(
                     new MsalExtensionException(
                         $"An error occurred, error: {query.Get("error")}, error_description: {query.Get("error_description")}"));
@@ -66,6 +59,7 @@ namespace EmbeddedMsalCustomWebUi.Wpf.Internal
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _token = _cancellationToken.Register(() => _taskCompletionSource.SetCanceled());
+            // navigating to an uri that is entry point to authorization flow.
             webBrowser.Navigate(_authorizationUri);
         }
 

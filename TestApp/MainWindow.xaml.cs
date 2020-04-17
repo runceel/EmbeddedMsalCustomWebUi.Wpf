@@ -35,10 +35,7 @@ namespace TestApp
             {
                 var r = await App.Current
                     .PublicClientApplication
-                    .AcquireTokenInteractive(new[]
-                    {
-                        "https://wpfnetcore.onmicrosoft.com/dd24b95f-0a1a-40af-ab70-a3a5a87a7bd5/read"
-                    })
+                    .AcquireTokenInteractive(App.Current.Scopes)
                     .WithCustomWebUi(new EmbeddedBrowserWebUi(this))
                     .ExecuteAsync();
 
