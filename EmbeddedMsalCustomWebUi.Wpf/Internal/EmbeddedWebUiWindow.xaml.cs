@@ -1,4 +1,4 @@
-﻿using Microsoft.Identity.Client.Extensibility;
+﻿using Microsoft.Identity.Client;
 using System;
 using System.Linq;
 using System.Threading;
@@ -49,7 +49,7 @@ namespace EmbeddedMsalCustomWebUi.Wpf.Internal
             {
                 // error.
                 _taskCompletionSource.SetException(
-                    new MsalExtensionException(
+                    new MsalException(
                         $"An error occurred, error: {query.Get("error")}, error_description: {query.Get("error_description")}"));
             }
 
