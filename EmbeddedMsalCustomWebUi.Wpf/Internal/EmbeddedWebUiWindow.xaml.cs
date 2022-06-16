@@ -1,15 +1,14 @@
-﻿using Microsoft.Identity.Client.Extensibility;
+﻿using Microsoft.Identity.Client;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
-using System.Windows.Navigation;
 
 namespace EmbeddedMsalCustomWebUi.Wpf.Internal
 {
-    public partial class EmbeddedWebUiWindow : Window
+    internal partial class EmbeddedWebUiWindow : Window
     {
         private readonly Uri _authorizationUri;
         private readonly Uri _redirectUri;
@@ -30,26 +29,27 @@ namespace EmbeddedMsalCustomWebUi.Wpf.Internal
             _cancellationToken = cancellationToken;
         }
 
-        private void WebBrowser_Navigating(object sender, NavigatingCancelEventArgs e)
+        private void webView2_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
         {
-            if (!e.Uri.ToString().StartsWith(_redirectUri.ToString()))
+            if (!e.Uri.StartsWith(_redirectUri.ToString()))
             {
                 // not redirect uri case
                 return;
             }
 
             // parse query string
-            var query = HttpUtility.ParseQueryString(e.Uri.Query);
+            var uri = new Uri(e.Uri);
+            var query = HttpUtility.ParseQueryString(uri.Query);
             if (query.AllKeys.Any(x => x == "code"))
             {
                 // It has a code parameter.
-                _taskCompletionSource.SetResult(e.Uri);
+                _taskCompletionSource.SetResult(uri);
             }
             else
             {
                 // error.
                 _taskCompletionSource.SetException(
-                    new MsalExtensionException(
+                    new MsalException(
                         $"An error occurred, error: {query.Get("error")}, error_description: {query.Get("error_description")}"));
             }
 
@@ -60,7 +60,7 @@ namespace EmbeddedMsalCustomWebUi.Wpf.Internal
         {
             _token = _cancellationToken.Register(() => _taskCompletionSource.SetCanceled());
             // navigating to an uri that is entry point to authorization flow.
-            webBrowser.Navigate(_authorizationUri);
+            webView2.Source = _authorizationUri;
         }
 
         private void Window_Closed(object sender, EventArgs e)
